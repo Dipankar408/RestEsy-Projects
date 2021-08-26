@@ -1,0 +1,36 @@
+apply plugin:"java"
+apply plugin:"application"
+apply plugin:"war"
+
+repositories{
+	mavenCentral()
+}
+
+dependencies {
+	
+	testImplementation group: 'junit', name: 'junit', version: '4.13.2'
+	implementation group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
+	
+	implementation group: 'com.google.inject', name: 'guice', version: '5.0.1'
+	implementation group: 'com.google.inject.extensions', name: 'guice-servlet', version: '5.0.1'
+	implementation group: 'com.google.inject.extensions', name: 'guice-persist', version: '5.0.1'
+	
+	implementation group: 'org.hibernate', name: 'hibernate-core', version: '5.5.6.Final'
+	implementation group: 'org.postgresql', name: 'postgresql', version: '42.2.23'
+//	implementation group: 'org.hibernate:hibernate-validator:6.0.11.Final'
+	
+	implementation group: 'org.jboss.resteasy', name: 'resteasy-guice', version: '4.7.1.Final'
+//	implementation group: 'org.jboss.resteasy', name: 'resteasy-jaxrs', version: '3.15.1.Final'
+	implementation group: 'org.jboss.resteasy', name: 'resteasy-jaxb-provider', version: '4.7.1.Final'
+	implementation group: 'org.jboss.resteasy', name: 'resteasy-servlet-initializer', version: '4.7.1.Final'
+	
+	
+	
+	
+	implementation group: 'org.jboss.resteasy', name: 'resteasy-html', version: '3.6.0.Final'
+	// https://mvnrepository.com/artifact/javax.servlet/jstl
+//   implementation group: 'javax.servlet', name: 'jstl', version: '1.2'
+   // https://mvnrepository.com/artifact/javax.servlet.jsp.jstl/jstl-api
+   implementation group: 'javax.servlet.jsp.jstl', name: 'jstl-api', version: '1.2'
+	implementation group: 'javax.ws.rs', name: 'javax.ws.rs-api', version: '2.1.1'
+}
