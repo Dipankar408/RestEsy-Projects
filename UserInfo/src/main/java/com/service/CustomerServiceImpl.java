@@ -7,6 +7,7 @@ import javax.persistence.Query;
 
 import com.db.Address;
 import com.db.Customer;
+import com.db.Password;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
@@ -20,7 +21,7 @@ public class CustomerServiceImpl implements CustomerService {
 	
 	@Override
 	@Transactional
-	public void createCustomer(int id,String name,int age,String num,long pin,String city,String distric,String state) {
+	public void createCustomer(int id,String name,int age,String num,long pin,String city,String distric,String state,String pass) {
 		EntityManager em=emp.get();
 		Customer c=new Customer();
 		c.setId(id);
@@ -29,7 +30,12 @@ public class CustomerServiceImpl implements CustomerService {
 		c.setNumber(num);
 		Address adr=null;
 		Query q=em.createQuery("Select a from Address a where a.pincode="+pin);
-		adr=(Address) q.getSingleResult();
+		try {
+			adr=(Address) q.getSingleResult();
+		}
+		catch(Exception e){
+			
+		}
 		if(adr!=null) {
 			c.setAdr(adr);
 		}
@@ -44,6 +50,12 @@ public class CustomerServiceImpl implements CustomerService {
 			em.persist(a);
 		}
 	
+		Password pw=new Password();
+		pw.setPassword(pass);
+		pw.setC(c);
+		
+		em.persist(pw);
+		
 		em.persist(c);
 		
 
@@ -65,6 +77,24 @@ public class CustomerServiceImpl implements CustomerService {
 		Query q1=em.createQuery("Select ct from Customer c,Contact ct where c.id=ct.ct order by c.id asc");
 		List<Object> clist=q1.getResultList();
 		return clist;
+	}
+
+	@Override
+	@Transactional
+	public boolean login(int id,String pass) {
+		EntityManager em=emp.get();
+		Password pw=null;
+		Query q=em.createQuery("Select p from Password p where p.c="+id+" and p.password='"+pass+"'");
+		try {
+			pw=(Password) q.getSingleResult();
+		}catch(Exception e) {
+			
+		}
+		if(pw!=null) {
+			return true;
+		}
+			return false;
+		
 	}
 
 }

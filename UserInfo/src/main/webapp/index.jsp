@@ -18,9 +18,10 @@
 	District:<input type="text" name="dist"/>
 	State:<input type="text" name="state"/>
 	PinCode:<input type="text" name="pin"/><br>
+	Password:<input type="text" name="pass"/><br>
  	<input type="submit">
 	</form>
-	
+	<a href="/UserInfo/login/${1}">Login</a>
 	<br><br><br>
 	<table border="1" align="center">
 		<tr>
